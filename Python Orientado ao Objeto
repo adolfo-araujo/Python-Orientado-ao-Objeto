@@ -1,0 +1,48 @@
+import random
+import string
+
+# Definição da classe GeradorSenha
+
+class GeradorSenha:
+    def __init__(self, tamanho, usar_maiusculas, usar_numeros, usar_simbolos):
+        self.tamanho = tamanho
+        self.usar_maiusculas = usar_maiusculas
+        self.usar_numeros = usar_numeros
+        self.usar_simbolos = usar_simbolos
+
+    def gerar(self):
+        caracteres = string.ascii_lowercase
+
+        if self.usar_maiusculas:
+            caracteres += string.ascii_uppercase
+        if self.usar_numeros:
+            caracteres += string.digits
+        if self.usar_simbolos:
+            caracteres += string.punctuation
+
+        senha = ''.join(random.choice(caracteres) for _ in range(self.tamanho))
+        return senha
+
+# Função principal
+
+def main():
+    print("=== GERADOR DE SENHAS (Orientado a Objeto) ===\n")
+
+    tamanho = int(input("Digite o tamanho da senha desejada: "))
+    usar_maiusculas = input("Incluir letras maiúsculas? (sim/não): ").lower() == 's'
+    usar_numeros = input("Incluir números? (sim/não): ").lower() == 's'
+    usar_simbolos = input("Incluir símbolos? (sim/não): ").lower() == 's'
+
+    # Cria o objeto gerador de senha
+    gerador = GeradorSenha(tamanho, usar_maiusculas, usar_numeros, usar_simbolos)
+    
+    # Gera a senha
+    senha = gerador.gerar()
+
+    print("\nSenha gerada:")
+    print(senha)
+    print("\n============================================")
+
+# Execução
+if __name__ == "__main__":
+    main()
